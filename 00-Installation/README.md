@@ -67,7 +67,7 @@ Para habilitar el soporte de WSL2 hay que correr estos comandos.
 ```
 # append those two lines into ~/.bashrc
 echo 'export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"' >> ~/.bashrc
-echo 'export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/mnt/c/Users/---Mi-usuario---/---carpeta-temporal"' >> ~/.bashrc
+echo 'export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/home/---Mi-usuario---/---carpeta-temporal---"' >> ~/.bashrc
 echo 'export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"' >> ~/.bashrc
 
 # now reload the ~/.bashrc file
