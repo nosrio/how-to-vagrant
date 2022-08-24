@@ -93,9 +93,10 @@ gid=1000
 umask=22
 fmask=111
 EOF
-
 ```
+
 Reiniciar el servicio de WSL. _Este comando reinicia todas las ventans de WSL abiertas_
+
 ```
 # Abrir powershell como administrador
 Get-Service LxssManager | Restart-Service
