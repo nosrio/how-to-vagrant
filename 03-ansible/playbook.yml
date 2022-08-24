@@ -1,0 +1,16 @@
+---
+
+- name: Simple playbook
+  hosts: all
+  handlers:
+    - name: Restart apache
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+  tasks:
+    - name: Install apache
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+      become: true
+      become_user: root
