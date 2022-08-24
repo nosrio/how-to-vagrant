@@ -6,6 +6,8 @@ mkdir 01-hello-world
 cd 01-hello-world
 ```
 
+Si se está ejecutando desde WSL, el repositorio debe estar clonado en algún directorio de linux y no de windows ya que la clave privada que se crea para conectarse via ssh necesita permisos que WSL no respeta.
+
 # [Vagrant init](https://www.vagrantup.com/docs/cli/init)
 
 Este comando permite crear un Vagrantfile inicial para levantar un VM especifica. Se pueden buscar distintas boxes en [vagrant cloud](https://app.vagrantup.com/boxes/search)
@@ -102,6 +104,34 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default:
     default: Guest Additions Version: 6.0.10
     default: VirtualBox Version: 6.1
+```
+
+# [Vagrant ssh](https://www.vagrantup.com/docs/cli/halt)
+
+Una vez que la instancia termina de levantar, podemos conectarnos a la misma via ssh usando el comando `vagrant ssh`
+
+```
+vagrant ssh
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug 24 02:32:27 UTC 2022
+
+  System load:  1.26              Processes:           121
+  Usage of /:   2.5% of 61.80GB   Users logged in:     0
+  Memory usage: 5%                IP address for eth0: 10.0.2.15
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 packages can be updated.
+0 updates are security updates.
 ```
 
 # [Vagrant halt](https://www.vagrantup.com/docs/cli/halt)
