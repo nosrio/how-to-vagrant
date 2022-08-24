@@ -63,20 +63,40 @@ sudo apt-get update && sudo apt-get install vagrant
 ```
 
 Para habilitar el soporte de WSL2 hay que correr estos comandos.
-
+Editar la variable  `VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH`
 ```
 # append those two lines into ~/.bashrc
 echo 'export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"' >> ~/.bashrc
-echo 'export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/home/---Mi-usuario---/---carpeta-temporal---"' >> ~/.bashrc
+echo 'export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/mnt/c/Users/--user--/Documents/--temporal--folder--"' >> ~/.bashrc
 echo 'export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"' >> ~/.bashrc
 
 # now reload the ~/.bashrc file
 source ~/.bashrc
 ```
 
-Y por último instalar [este plugin](https://github.com/Karandash8/virtualbox_WSL2)
+También hay que instalar [este plugin](https://github.com/Karandash8/virtualbox_WSL2)
 
 ```
 # Install virtualbox_WSL2 plugin
 vagrant plugin install virtualbox_WSL2
+```
+
+Y por último hay un fix de los permisos de wsl para que no de un error al momento de conectarse via ssh.
+
+```
+# Crear este file
+cat << EOF > /etc/wsl.conf
+[automount]
+options = "metadata"
+uid=1000
+gid=1000
+umask=22
+fmask=111
+EOF
+
+```
+Reiniciar el servicio de WSL. _Este comando reinicia todas las ventans de WSL abiertas_
+```
+# Abrir powershell como administrador
+Get-Service LxssManager | Restart-Service
 ```
