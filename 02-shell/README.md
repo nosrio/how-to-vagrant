@@ -1,4 +1,13 @@
-# [Carpetas compartidas](https://www.vagrantup.com/docs/synced-folders)
+# Armando el directorio de trabajo
+
+Para empezar esta parte primero creeamos una carpeta dedicada a tener los files que se vayan a usar
+
+```
+mkdir 02-shell
+cd 02-sheel
+```
+
+# Como montar una carpeta local en la VM
 
 Por default, vagrant monta en el directorio `/vagrant/` de la VM el directorio donde está creado el Vagrantfile. Para activar esta feature hay que remover la siguiente linea del Vagrantile que tenemos.
 
@@ -6,11 +15,11 @@ Por default, vagrant monta en el directorio `/vagrant/` de la VM el directorio d
   config.vm.synced_folder ".", "/vagrant", disabled: true
 ```
 
-Adicionalmente, se puede usar esta config para montar otros directorios.
+Adicionalmente, se puede usar esta config para montar otros [directorios](https://www.vagrantup.com/docs/synced-folders).
 
-# [Shell provisioner](https://www.vagrantup.com/docs/provisioning/shell)
-
-Vagrant tiene varios provisioners que permite ejecutar varias acciones al momento de aprovisionar la VM. El _shell provisioner_ permite correr un script. Para esto, como primer paso vamos a crear un file `provisioner.sh`
+# Como correr un script al crear una VM
+s
+Vagrant tiene varios provisioners que permite ejecutar varias acciones al momento de aprovisionar la VM. El [shell provisioner](https://www.vagrantup.com/docs/provisioning/shell) permite correr un script. Para esto, como primer paso vamos a crear un file `provisioner.sh`
 
 ## Crear un script
 

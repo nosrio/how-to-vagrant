@@ -1,4 +1,5 @@
-# Bootstrap
+# Armando el directorio de trabajo
+
 Para empezar esta parte primero creeamos una carpeta dedicada a tener los files que se vayan a usar
 
 ```
@@ -6,17 +7,17 @@ mkdir 01-hello-world
 cd 01-hello-world
 ```
 
-Si se está ejecutando desde WSL, el repositorio debe estar clonado en algún directorio de linux y no de windows ya que la clave privada que se crea para conectarse via ssh necesita permisos que WSL no respeta.
+# Como generar un Vagrantfile
 
-# [Vagrant init](https://www.vagrantup.com/docs/cli/init)
+El comando [vagrant init](https://www.vagrantup.com/docs/cli/init) permite crear un Vagrantfile inicial para levantar un VM especifica. Dicho file tiene varias configuraciones que se veran más adelante. 
 
-Este comando permite crear un Vagrantfile inicial para levantar un VM especifica. Se pueden buscar distintas boxes en [vagrant cloud](https://app.vagrantup.com/boxes/search)
+El Vagrantfile inicial parte de una "box" o imagen base. Se pueden buscar distintas boxes en [vagrant cloud](https://app.vagrantup.com/boxes/search)
 
 ```
 vagrant init hashicorp/bionic64
 ```
 
-Se pueden usar los siguientes flags en este comando
+Adicionalmente se pueden usar los siguientes flags en este comando
 
 ```
 -m Crea un vagrantfile sin comentarios.
@@ -28,13 +29,11 @@ Se pueden usar los siguientes flags en este comando
     vagrant init --box-version '> 0.1.5' hashicorp/bionic64
 ```
 
-# Vagrantfile
+# Como especificar la imagen base
 
-La sintaxis de este file es ruby y describe las configuraciones de virtualbox para levantar la VM.
+La sintaxis del Vagrantfile esta basanda en ruby y describe un conjunto de configuraciones al momento de  levantar la VM. Pueden verse más detalles de como configurarlo [acá](https://www.vagrantup.com/docs/vagrantfile/version).
 
-## [Vagrant.configure](https://www.vagrantup.com/docs/vagrantfile/version)
-
-Asi arrancan los vagrantfile y dentro se agregan todas las configuraciones pertinentes.
+Con la directiva `vagrant.configure` arrancan los vagrantfile y dentro se agregan todas las configuraciones pertinentes.
 ```
 Vagrant.configure("2") do |config|
   # ...
@@ -50,7 +49,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Cada setting que tiene virtualbox se puede tunear dentro del configure. En el caso de Windows+WSL para que levanté hay que agregar los siguientes settings:
+Cada setting que tiene virtualbox (o otros virtualizadores) se puede tunear dentro del configure. En el caso de Windows+WSL para que levanté hay que agregar los siguientes settings:
 
 ```
   # Desconecta el puerto serie por https://www.virtualbox.org/ticket/18319
@@ -61,9 +60,9 @@ Cada setting que tiene virtualbox se puede tunear dentro del configure. En el ca
   config.vm.synced_folder ".", "/vagrant", disabled: true
 ```
 
-# [Vagrant up](https://www.vagrantup.com/docs/cli/up)
+# Como levantar una VM
 
-Una vez que el Vagrantfile está configurado, corriendo el comando `vagrant up` se aprovisiona la VM.
+Una vez que el Vagrantfile está configurado, corriendo el comando [vagrant up](https://www.vagrantup.com/docs/cli/up) se aprovisiona la VM.
 
 ```
 vagrant up
@@ -106,9 +105,10 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: VirtualBox Version: 6.1
 ```
 
-# [Vagrant ssh](https://www.vagrantup.com/docs/cli/halt)
+# Como conectarse a la VM
 
-Una vez que la instancia termina de levantar, podemos conectarnos a la misma via ssh usando el comando `vagrant ssh`
+Una vez que la instancia termina de levantar, podemos conectarnos a la misma via ssh usando el comando [vagrant ssh](https://www.vagrantup.com/docs/cli/ssh)
+
 
 ```
 vagrant ssh
@@ -134,18 +134,18 @@ Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
 0 updates are security updates.
 ```
 
-# [Vagrant halt](https://www.vagrantup.com/docs/cli/halt)
+# Como apagar la VM
 
-Una vez finalizada las pruebas puede detenerse la VM usando `vagrant halt`
+Una vez finalizada las pruebas puede detenerse la VM usando [vagrant halt](https://www.vagrantup.com/docs/cli/halt).
 
 ```
 vagrant halt
 ==> default: Attempting graceful shutdown of VM...
 ```
 
-# [Vagrant destroy](https://www.vagrantup.com/docs/cli/destroy)
+# Como destruir la VM
 
-O destruirse usando `vagrant destroy`
+O destruirse usando [vagrant destroy](https://www.vagrantup.com/docs/cli/destroy).
 
 ```
 vagrant destroy
