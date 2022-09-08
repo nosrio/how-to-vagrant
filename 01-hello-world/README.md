@@ -49,6 +49,9 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+Hay varios boxes base de la cual partir en [vagrant cloud](https://app.vagrantup.com/boxes/search).
+Un buen punto de partida es el [proyecto Bento](https://app.vagrantup.com/bento), que genera y mantiene varias distribuciones de linux.
+
 Cada setting que tiene virtualbox (o otros virtualizadores) se puede tunear dentro del configure. En el caso de Windows+WSL para que levanté hay que agregar los siguientes settings:
 
 ```
