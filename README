@@ -1,13 +1,17 @@
 # Index
 
 ## 00-Installation 
-Como instalar Vagrant
+Como instalar Vagrant.
 
 ## 01-hello-world
-Como levantar primer VM
+Como levantar primer VM.
 
 ## 02-shell
-Como usar shell provisioner
+Como usar shell provisioner.
 
 ## 03-ansible
-Como usar ansible provisioner
+Como usar ansible provisioner.
+
+## 04-snapshot
+
+Como usar los snapshots.
