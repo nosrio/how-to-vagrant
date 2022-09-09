@@ -3,8 +3,8 @@
 Para empezar esta parte primero creeamos una carpeta dedicada a tener los files que se vayan a usar
 
 ```
-mkdir 04-snapshot
-cd 04-snapshot
+mkdir 05-snapshot
+cd 05-snapshot
 ```
 
 # Como evitar levantar una VM de cero

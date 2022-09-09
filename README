@@ -12,6 +12,8 @@ Como usar shell provisioner.
 ## 03-ansible
 Como usar ansible provisioner.
 
-## 04-snapshot
+## 04-docker
+Como usar docker provisioner.
 
+## 05-snapshot
 Como usar los snapshots.
