@@ -1,0 +1,5 @@
+# General
+.vagrant/
+.kube/
+images-repository/
+join-command
