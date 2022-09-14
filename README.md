@@ -17,3 +17,6 @@ Como usar docker provisioner.
 
 ## 05-snapshot
 Como usar los snapshots.
+
+## 06-kubernetes
+Como armar un cluster de kubernetes local.
