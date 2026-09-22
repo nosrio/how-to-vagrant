@@ -100,10 +100,7 @@
 - ansible.builtin.set_fact:
     node_address: "{{ ansible_facts['eth1']['ipv4']['address'] }}"
 
-- ansible.builtin.set_fact:
-    node_prefix: "{{ ansible_facts['eth1']['ipv4']['prefix'] }}"
-
 - name: Configure kubelet
   lineinfile:
-    path: /lib/systemd/system/kubelet.service.d/10-kubeadm.conf
-    line: Environment="KUBELET_EXTRA_ARGS=--node-ip={{ node_address }}/{{ node_prefix }}"
+    path: /etc/default/kubelet
+    line: KUBELET_EXTRA_ARGS=--node-ip={{ node_address }}

@@ -48,6 +48,7 @@
     values:
       operator:
         replicas: 1
+      devices: eth1
 
 - name: Generate join command
   command: kubeadm token create --print-join-command
