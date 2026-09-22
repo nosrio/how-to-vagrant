@@ -1,0 +1,19 @@
+---
+- name: Apply common configurations
+  hosts: all
+  become: true
+  roles:
+    - common
+
+- name: Configure master nodes
+  hosts: master
+  become: true
+  roles:
+    - master
+
+- name: Configure nodes
+  hosts: node
+  become: true
+  roles:
+    - node
+

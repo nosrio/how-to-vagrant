@@ -1,0 +1,58 @@
+---
+- name: Check for Kubernetes config     
+  stat: 
+    path: /etc/kubernetes/admin.conf
+  register: kubernetes_config
+
+- ansible.builtin.set_fact:
+    node_address: "{{ ansible_facts['eth1']['ipv4']['address'] }}"
+
+- name: Initialize the Kubernetes cluster using kubeadm
+  command: kubeadm init --apiserver-advertise-address="{{ node_address }}" --apiserver-cert-extra-sans="{{ node_address }}" --pod-network-cidr={{ k8s_pod_network_cidr }}
+  when: not kubernetes_config.stat.exists
+
+- name: Create kube directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /home/vagrant/.kube
+    - /vagrant/.kube
+
+- name: Setup kubeconfig for vagrant user
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/vagrant/.kube/config
+    remote_src: yes
+    owner: vagrant
+    group: vagrant
+    mode: '0644'
+
+- name: Setup kubeconfig for controller
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /vagrant/.kube/admin.conf
+    remote_src: yes
+
+
+- name: Install Cilium with Helm (runs locally)
+  delegate_to: localhost
+  become: false
+  kubernetes.core.helm:
+    name: cilium
+    chart_ref: oci://quay.io/cilium/charts/cilium
+    chart_version: "{{ k8s_cilium_version }}"
+    release_namespace: kube-system
+    kubeconfig: "{{ playbook_dir }}/../.kube/admin.conf"
+    wait: true
+    values:
+      operator:
+        replicas: 1
+
+- name: Generate join command
+  command: kubeadm token create --print-join-command
+  register: join_command
+
+- name: Copy join command to local file
+  become: false
+  local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"
