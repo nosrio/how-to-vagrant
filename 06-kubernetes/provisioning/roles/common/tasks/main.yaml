@@ -59,6 +59,7 @@
   loop:
     - { name: "net.bridge.bridge-nf-call-iptables", value: 1 }
     - { name: "net.ipv4.ip_forward", value: 1 }
+    - { name: "net.ipv4.conf.default.rp_filter", value: 2 }
 
 - name: Ensure /etc/apt/keyrings exists
   ansible.builtin.file:
@@ -95,6 +96,16 @@
     - kubelet
     - kubeadm
     - kubectl
+
+- name: Install crictl
+  ansible.builtin.unarchive:
+    src: "{{ crictl_dl_url }}"
+    dest: "{{ crictl_bin_path }}"
+    owner: "{{ crictl_file_owner }}"
+    group: "{{ crictl_file_group }}"
+    extra_opts:
+      - crictl
+    remote_src: yes
 
 # This might change between ubuntu distributions
 - ansible.builtin.set_fact:

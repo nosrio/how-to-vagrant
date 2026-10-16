@@ -2,5 +2,12 @@
 - name: Copy the join command to server location
   copy: src=join-command dest=/tmp/join-command.sh mode=0777
 
+- name: Check that node is ready
+  ansible.builtin.uri:
+    url: http://localhost:10248/healthz
+    return_content: true
+  register: this
+
 - name: Join the node to cluster
   command: sh /tmp/join-command.sh
+  when: "'ok' not in this.content"

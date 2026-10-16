@@ -1,3 +1,20 @@
 k8s_version: "1.36"
 k8s_pod_network_cidr: "172.16.0.0/16"
 k8s_cilium_version: "1.20.2"
+crictl_app: crictl
+crictl_version: 1.37.0
+crictl_os: "{{ ansible_facts['system'] | lower }}"
+crictl_architecture: "{{ ansible_facts['architecture'] }}"
+crictl_architecture_map:
+  amd64: amd64
+  arm: arm64
+  x86_64: amd64
+  armv6l: armv6
+  armv7l: armv7
+  aarch64: arm64
+  32-bit: "386"
+  64-bit: amd64
+crictl_dl_url: https://github.com/kubernetes-sigs/cri-tools/releases/download/v{{ crictl_version }}/{{ crictl_app }}-v{{ crictl_version }}-{{ crictl_os }}-{{ crictl_architecture_map[crictl_architecture] }}.tar.gz
+crictl_bin_path: /usr/local/bin
+crictl_file_owner: root
+crictl_file_group: root
