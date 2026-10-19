@@ -34,6 +34,14 @@
     dest: /vagrant/.kube/admin.conf
     remote_src: yes
 
+- name: Install etcd client binaries
+  apt: 
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+      - etcd-client
 
 - name: Install Cilium with Helm (runs locally)
   delegate_to: localhost
